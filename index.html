@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101827">
+  <title>ViralBD6 — Watch Videos</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <style>
+    :root{color-scheme:dark;--bg:#0b1220;--panel:#141f31;--line:#26364e;--text:#f4f7fb;--muted:#9eacc0;--accent:#39d6a0}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172b3d 0,#0b1220 55%);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+    main{width:min(760px,100%);margin:auto;padding:24px 18px 48px}.brand{display:flex;align-items:center;gap:12px;margin:10px 0 28px}.mark{width:44px;height:44px;border-radius:14px;background:var(--accent);color:#071a16;display:grid;place-items:center;font-weight:900;font-size:20px}.brand strong{font-size:19px;letter-spacing:.3px}.brand small{display:block;color:var(--muted);font-size:12px}
+    h1{font-size:clamp(28px,6vw,42px);line-height:1.12;margin:0 0 10px}.intro{color:var(--muted);margin:0 0 26px}.section-title{font-size:18px;margin:26px 0 12px}.videos{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.video{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:16px;text-align:left;color:var(--text);cursor:pointer}.video.selected{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}.thumb{height:100px;border-radius:10px;background:linear-gradient(135deg,#244a58,#26304e);display:grid;place-items:center;font-size:30px;margin-bottom:12px}.video strong{display:block}.video small{color:var(--muted)}.steps{display:grid;gap:10px}.step{padding:14px;border:1px solid var(--line);background:var(--panel);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:12px}.step small{display:block;color:var(--muted)}.pill{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:5px 9px;white-space:nowrap}.notice{border:1px solid #6b5931;background:#302719;color:#f3d99a;padding:12px 14px;border-radius:12px;font-size:13px;margin-top:16px}.primary{width:100%;border:0;border-radius:12px;background:var(--accent);color:#071a16;font-weight:800;font-size:16px;padding:15px;margin-top:18px;cursor:pointer}.primary:disabled{opacity:.45;cursor:not-allowed}.status{color:var(--muted);font-size:13px;margin-top:12px;min-height:20px}footer{color:#718198;text-align:center;font-size:12px;margin-top:38px}
+  </style>
+</head>
+<body>
+<main>
+  <div class="brand"><div class="mark">V</div><div><strong>ViralBD6</strong><small>Watch • Complete • Unlock</small></div></div>
+  <h1>Choose a video.<br>Unlock the experience.</h1>
+  <p class="intro">Select a video below and follow the required steps to unlock its destination.</p>
+  <h2 class="section-title">Select a video</h2>
+  <section class="videos" id="videos">
+    <button class="video" data-video="video-1"><div class="thumb">▶</div><strong>Featured Video 01</strong><small>Video destination coming soon</small></button>
+    <button class="video" data-video="video-2"><div class="thumb">▶</div><strong>Featured Video 02</strong><small>Video destination coming soon</small></button>
+    <button class="video" data-video="video-3"><div class="thumb">▶</div><strong>Featured Video 03</strong><small>Video destination coming soon</small></button>
+  </section>
+  <h2 class="section-title">Unlock steps</h2>
+  <section class="steps">
+    <div class="step"><div><strong>Step 1 — Monetag</strong><small>Ad provider integration pending</small></div><span class="pill">Not started</span></div>
+    <div class="step"><div><strong>Step 2 — Adsgram</strong><small>Ad provider integration pending</small></div><span class="pill">Not started</span></div>
+    <div class="step"><div><strong>Step 3 — Partner Ad</strong><small>Third ad provider to be configured</small></div><span class="pill">Not started</span></div>
+  </section>
+  <div class="notice">Ad completion will be confirmed by the ad provider. A timer alone will not unlock a video.</div>
+  <button class="primary" id="continue" disabled>Choose a video to continue</button>
+  <div class="status" id="status" role="status"></div>
+  <footer>ViralBD6 · Secure video unlock</footer>
+</main>
+<script>
+  const tg = window.Telegram && window.Telegram.WebApp;
+  if (tg) { tg.ready(); tg.expand(); }
+  const cards = [...document.querySelectorAll('.video')];
+  const continueButton = document.getElementById('continue');
+  const status = document.getElementById('status');
+  let selectedVideo = null;
+  cards.forEach(card => card.addEventListener('click', () => {
+    cards.forEach(item => item.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedVideo = card.dataset.video;
+    continueButton.disabled = false;
+    continueButton.textContent = 'Continue to ad steps';
+    status.textContent = card.querySelector('strong').textContent + ' selected.';
+  }));
+  continueButton.addEventListener('click', () => {
+    if (!selectedVideo) return;
+    status.textContent = 'Selected: ' + selectedVideo + '. Ad provider setup is the next development step.';
+  });
+</script>
+</body>
+</html>
