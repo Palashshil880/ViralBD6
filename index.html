@@ -5,7 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101827">
   <title>ViralBD6 — Watch Videos</title>
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://telegram.org/js/telegram-web-app.js">  demoButton.addEventListener('click', () => {
+    demoButton.disabled = true;
+    let seconds = 10;
+    status.textContent = 'Demo timer: 10 seconds. This is not an ad verification.';
+    const timer = setInterval(() => {
+      seconds--;
+      if (seconds > 0) status.textContent = 'Demo timer: ' + seconds + ' seconds. This is not an ad verification.';
+      else {
+        clearInterval(timer);
+        status.textContent = 'Demo timer finished. Ad provider integration is still required; no unlock was granted.';
+        demoButton.disabled = false;
+      }
+    }, 1000);
+  });
+</script>
   <style>
     :root{color-scheme:dark;--bg:#0b1220;--panel:#141f31;--line:#26364e;--text:#f4f7fb;--muted:#9eacc0;--accent:#39d6a0}
     *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172b3d 0,#0b1220 55%);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
